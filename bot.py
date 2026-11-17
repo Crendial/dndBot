@@ -148,7 +148,6 @@ def _facets(sides: int, pts):
             top, right, bottom, left = pts      # order matches _shape
             q = (cx, cy + (bottom[1] - cy) * D8_MEET_POINT)  # Facet meeting point.
             return [[top, q], [left, q], [right, q]]
-
         case 10:
             top, right, bottom, left = pts      # order matches _shape
             half_w = right[0] - cx              
