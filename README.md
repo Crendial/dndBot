@@ -23,7 +23,7 @@ The names are pretty self explanatory. Each command rolls their respective die, 
 
 **D8:**
 
-![Image of 2 dimensional D8 rendered with pillow, rolled a 6](mdImages/botD8)
+![Image of 2 dimensional D8 rendered with pillow, rolled a 6](mdImages/botD8.png)
 
 **D10:**
 
@@ -35,7 +35,7 @@ The names are pretty self explanatory. Each command rolls their respective die, 
 
 **D20:**
 
-![Image of a 2 dimensional D20 rendered with pillow, rolled a 15](mdImages/botD20)
+![Image of a 2 dimensional D20 rendered with pillow, rolled a 15](mdImages/botD20.png)
 
 ### The outlier: Multiroll
 Multiroll rolls multiple of the given die. The image is a collage of all rolls and the total of the rolls is in the message text. You may think that rolling multiple dice would start struggling with efficiency issues, however each die tile is cached and can be reused during the bots activity.
@@ -48,8 +48,9 @@ Nice! We rolled both a nat20 (max roll) and a nat1 (minimum roll)! This is a per
 
 ## Deploying and modifying
 
+### Deploying:
 You want to be the friend to host a fun little bot?
-It's really easy! Here is a step by step guide:
+It's pretty easy! Here is a step by step guide:
 1. Go to https://discord.com/developers/applications and create an app with the name of your choice.
 2. Go to the **installation** section of your app, give it the **Guild Install installation context method**. In default install settings under guild install, give it the **application.commands** scope. You also should grab the **installation link.**
 3. In the bot section, give it the name of your choice and tick Public Bot on to make installation for you and your friends easy, though keep in mind to not share the link if this is on. Finally, grab the bot token. **DO NOT SHARE THIS WITH ANYONE, KEEP IT SAFE!**
@@ -99,4 +100,26 @@ pip install -r requirements.txt
 
 Keep the console you used to activate the venv in the background, you'll need it soon!
 
-7.
+7. Make a .env:
+This repo provides a .env.example. Currently very simple:
+- Edit .env.example and replace <The token you saved earlier> with the actual token.
+- Rename .env.example to .env
+
+8. You can run the bot!:
+- Simply open the console you have the venv activated in and run
+```console
+python bot.py
+```
+(Remember, if you had to replace 'python' earlier, do the same here!)
+
+Your console should print the following if everything worked:
+```console
+<bot name>#<numbers> has successfully connected to the cord!
+```
+
+### Modifying:
+You can obviously do anything you want with the code, but I made changing a few things a lot easier for you, mainly how the dice look:
+
+![Screenshot of commented variables in the code](mdImages/botCode.png)
+
+Since the images are rendered on the fly, modifying how they end up is easy! I commented and explained all the modifiable variables as well as die color blocks. Simply edit bot.py, change the numbers around and see what happens! (I am not responsible for any changes breaking stuff ok?)
