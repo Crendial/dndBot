@@ -12,31 +12,31 @@ As long as someone in the Discord server you're in is hosting it (see deploying 
 
 ### What do they do?:
 
-The names are pretty self explanatory. Each command rolls their respective die, renders it with pillow and sends the rendered image. Here is what they look like.
+The names are pretty self-explanatory. Each command rolls its respective die, renders it with Pillow and sends the rendered image. Here is what they look like.
 
 **D4:**
 
-![Image of a 2 dimensional D4 rendered with pillow, rolled a 2](mdImages/botD4.png)
+![Image of a 2 dimensional D4 rendered with Pillow, rolled a 2](mdImages/botD4.png)
 
 **D6:**
 
-![Image of 2 dimensional D6 rendered with pillow, rolled a 3](mdImages/botD6.png)
+![Image of a 2 dimensional D6 rendered with Pillow, rolled a 3](mdImages/botD6.png)
 
 **D8:**
 
-![Image of 2 dimensional D8 rendered with pillow, rolled a 6](mdImages/botD8.png)
+![Image of a 2 dimensional D8 rendered with Pillow, rolled a 6](mdImages/botD8.png)
 
 **D10:**
 
-![Image of a 2 dimensional D10 rendered with pillow, rolled a 9](mdImages/botD10.png)
+![Image of a 2 dimensional D10 rendered with Pillow, rolled a 9](mdImages/botD10.png)
 
 **D12:**
 
-![Image of a 2 dimensional D12 rendered with pillow, rolled a 6](mdImages/botD12.png)
+![Image of a 2 dimensional D12 rendered with Pillow, rolled a 6](mdImages/botD12.png)
 
 **D20:**
 
-![Image of a 2 dimensional D20 rendered with pillow, rolled a 15](mdImages/botD20.png)
+![Image of a 2 dimensional D20 rendered with Pillow, rolled a 15](mdImages/botD20.png)
 
 ### The outlier: Multiroll
 Multiroll rolls multiple of the given die. The image is a collage of all rolls and the total of the rolls is in the message text. You may think that rolling multiple dice would start struggling with efficiency issues, however each die tile is cached and can be reused during the bot's activity.
@@ -92,7 +92,7 @@ source <path-to-venv>/bin/activate.fish
 # Windows (PowerShell)
 <path-to-venv>\Scripts\Activate.ps1
 ```
-(If the command 'python' doesn't exist, try python3 or  py instead. If both fail, Python may not be installed or is missing from your PATH)
+(If the command 'python' doesn't exist, try python3 or py instead. If both fail, Python may not be installed or is missing from your PATH)
 
 And then install dependencies:
 ```console
@@ -103,8 +103,8 @@ Keep the console you used to activate the venv in the background, you'll need it
 
 7. Make a .env:
 This repo provides a .env.example. Currently very simple:
-- Make a copy of .env.example and name the copy as .env
-- Edit .env and replace <The token you saved earlier> with the actual token.
+- Make a copy of .env.example and name the copy `.env` (in the same directory as bot.py)
+- Edit .env and replace `<The token you saved earlier>` with the actual token.
 
 
 8. You can run the bot!:
