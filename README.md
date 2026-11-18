@@ -6,11 +6,11 @@
 - Thoroughly commented and explained code.
 
 ## Usage:
-As long as someone in the Disocrd server you're in is hosting it (see deploying and modifying section), you'll have access to the following slash commands:
+As long as someone in the Discord server you're in is hosting it (see deploying and modifying section), you'll have access to the following slash commands:
 
-![Screenshot of available Disrord commands](mdImages/botCommands.png)
+![Screenshot of available Discord commands](mdImages/botCommands.png)
 
-### What they do they do?:
+### What do they do?:
 
 The names are pretty self explanatory. Each command rolls their respective die, renders it with pillow and sends the rendered image. Here is what they look like.
 
@@ -39,7 +39,7 @@ The names are pretty self explanatory. Each command rolls their respective die, 
 ![Image of a 2 dimensional D20 rendered with pillow, rolled a 15](mdImages/botD20.png)
 
 ### The outlier: Multiroll
-Multiroll rolls multiple of the given die. The image is a collage of all rolls and the total of the rolls is in the message text. You may think that rolling multiple dice would start struggling with efficiency issues, however each die tile is cached and can be reused during the bots activity.
+Multiroll rolls multiple of the given die. The image is a collage of all rolls and the total of the rolls is in the message text. You may think that rolling multiple dice would start struggling with efficiency issues, however each die tile is cached and can be reused during the bot's activity.
 To show what multiroll looks like in practice, we'll roll 4 D20s:
 
 ![Screenshot of a user inputting multiroll with 4 D20s](mdImages/multirollSlashCommand.png)
@@ -68,14 +68,14 @@ git clone https://github.com/Crendial/dndBot.git
 ```
 
 5b. Download the zip:
-- Open the green **Code** button at the top of this repository
+- Click the green **Code** button at the top of this repository
 - Click **Download ZIP**
 - Unzip the file, put its contents into the directory of your choice.
 
-6. Create your virtual environment (You need python version 3.9 or above):
-- Create a venv:
+6. Create your virtual environment (You need python version 3.10-3.14):
+- Create a venv (Debian/Ubuntu users may need to install python3-venv separately):
 ```console
-cd <directory with bot files/requirements.txt>
+cd <directory containing bot.py and requirements.txt>
 python -m venv <path-to-venv>
 ```
 Then activate it using the line for your system:
@@ -103,8 +103,9 @@ Keep the console you used to activate the venv in the background, you'll need it
 
 7. Make a .env:
 This repo provides a .env.example. Currently very simple:
-- Edit .env.example and replace <The token you saved earlier> with the actual token.
-- Rename .env.example to .env
+- Make a copy of .env.example and name the copy as .env
+- Edit .env and replace <The token you saved earlier> with the actual token.
+
 
 8. You can run the bot!:
 - Simply open the console you have the venv activated in and run
@@ -117,6 +118,7 @@ Your console should print the following if everything worked:
 ```console
 <bot name>#<numbers> has successfully connected to the cord!
 ```
+To stop it, press Ctrl+C or close the console.
 
 ### Modifying:
 You can obviously do anything you want with the code, but I made changing a few things a lot easier for you, mainly how the dice look:
