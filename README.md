@@ -13,6 +13,7 @@ As long as someone in the Disocrd server you're in is hosting it (see deploying 
 ### What they do they do?:
 
 The names are pretty self explanatory. Each command rolls their respective die, renders it with pillow and sends the rendered image. Here is what they look like.
+
 **D4:**
 
 ![Image of a 2 dimensional D4 rendered with pillow, rolled a 2](mdImages/botD4.png)
