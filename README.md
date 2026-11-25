@@ -59,7 +59,7 @@ Nice! We rolled both a nat20 (max roll) and a nat1 (minimum roll)! This is a per
 You want to be the friend to host a fun little bot?
 It's pretty easy! Here is a step by step guide:
 
-1. Go to [](https://discord.com/developers/applications) and create an app with the name of your choice.
+1. Go to [discord.com/developers/applications](https://discord.com/developers/applications) and create an app with the name of your choice.
 
 2. Go to the **installation** section of your app, give it the **Guild Install installation context method**. In default install settings under guild install, give it the **application.commands** scope. You also should grab the **installation link.**
 
