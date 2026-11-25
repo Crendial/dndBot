@@ -1,14 +1,16 @@
 import os
 import math
 import io
+import asyncio
+import random
+from random import randint, choice 
 from functools import lru_cache
-from random import randint
 
 import discord
 from dotenv import load_dotenv
 from PIL import Image, ImageDraw, ImageFont
 
-load_dotenv()       # Loads .env for bot token (DISCORD_TOKEN)
+load_dotenv()       # Loads .env for bot token (DISCORD_TOKEN) and quote channel "YAPPER_CHANNEL"
 
 bot = discord.Bot()
 
@@ -79,7 +81,21 @@ RED = {     # Red when rolling a NAT1.
     "text": (255, 255, 255, 255),
 }
 
-# --- Drawing the dice using pullow ---
+# Random quotes function stuff
+QUOTES = [
+    "quote 1",
+    "quote 2",
+    "quote 3",
+    "quote 4",
+    "quote 5",
+]
+YAPPER = False
+MIN_TIME = 5        # Min delay between saying something 
+MAX_TIME = 7200       # Max delay between saying something (7200 = 2 hours)
+TIME_DEBUG = True   # Prints delay between saying something in the terminal
+QUOTE_DEBUG = True  # Prints the quote the bot will say in the terminal.
+
+# --- Drawing the dice using Pillow ---
 def _palette(sides: int, value: int) -> dict:
     """
     Picks color scheme. Max is checked first, so it wins over 1. Just in case.
@@ -225,11 +241,26 @@ def render_rolls(sides: int, rolls: list[int]) -> discord.File:
     buf.seek(0)
     return discord.File(buf, filename="roll.png")
 
-
+# --- Passive bot actions ---
 @bot.event
 async def on_ready():
     print(f"{bot.user} has successfully connected to the cord!")
+    if YAPPER:
+        print("The bot will try to send quotes!")
+        while YAPPER:
+            channel_id = int(os.getenv('YAPPER_CHANNEL'))
+            channel = bot.get_channel(channel_id)
+            delay = randint(MIN_TIME, MAX_TIME)
+            if TIME_DEBUG:
+                print(f"Quote coming in {delay} seconds")
+            
+            quote = random.choice(QUOTES)
+            if QUOTE_DEBUG:
+                print(f"Incoming quote is: {quote}")
+            await asyncio.sleep(delay)
+            await channel.send(quote)
 
+# --- Active bot actions ---
 def make_roll_command(sides: int):
     async def roll(ctx: discord.ApplicationContext):
         await ctx.respond(file=render_rolls(sides, [roll_die(sides)]))
