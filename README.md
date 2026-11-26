@@ -8,7 +8,8 @@
   `party.py`.
 - Different color die for low and maximum rolls.
 - Thoroughly commented and explained code.
-- Capable of sending quotes to a channel of your choice. (off by default)
+- Capable of sending quotes to a channel of your choice. Quotes live in a local `quotes.py`, copied
+  from `quotes_example.py`. (off by default)
 
 ## Usage
 
@@ -164,6 +165,10 @@ This repo provides a `.env.example` with two values:
   modifiers with your party's. `party.py` is gitignored, so your real values stay local; without it,
   the bot uses the placeholders from `party_example.py`.
 
+- For Yapper, copy `quotes_example.py` to `quotes.py` and replace the placeholders with your own
+  quotes. `quotes.py` is gitignored; without it, the bot uses the placeholders from
+  `quotes_example.py`.
+
 8. You can run the bot!:
 
 - Simply open the console you have the venv activated in and run
@@ -196,6 +201,6 @@ numbers around and see what happens! (I am not responsible for any changes break
 
 Yapper is off by default. To turn it on, set `YAPPER = True` in the "Random quotes function stuff"
 section near the top of `bot.py`, then set `YAPPER_CHANNEL` in `.env` to the ID of the channel you
-want quotes posted in. In that same section you can replace the placeholder `QUOTES` list with your
-own quotes, and change `MIN_TIME` / `MAX_TIME` (in seconds) to control how long the bot waits
-between quotes. The defaults are 5 seconds to 2 hours.
+want quotes posted in. Add your own quotes to your local `quotes.py` (one string per entry) in place
+of the placeholders from `quotes_example.py`, and change `MIN_TIME` / `MAX_TIME` (in seconds) in
+`bot.py` to control how long the bot waits between quotes. The defaults are 5 seconds to 2 hours.

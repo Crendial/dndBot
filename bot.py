@@ -15,6 +15,11 @@ try:  # Local party.py holds the real character names and DEX modifiers.
 except ModuleNotFoundError:  # Public checkout: fall back to the placeholders.
     from party_example import CHARACTERS
 
+try:
+    from quotes import QUOTES
+except ModuleNotFoundError:
+    from quotes_example import QUOTES
+
 load_dotenv()  # Loads .env for bot token (DISCORD_TOKEN) and quote channel "YAPPER_CHANNEL"
 
 bot = discord.Bot()
@@ -90,14 +95,7 @@ RED = {  # Red when rolling a NAT1.
     "text": (255, 255, 255, 255),
 }
 
-# Random quotes function stuff
-QUOTES = [
-    "quote 1",
-    "quote 2",
-    "quote 3",
-    "quote 4",
-    "quote 5",
-]
+# Random quotes function stuff (the quotes themselves live in quotes.py)
 YAPPER = False
 MIN_TIME = 5  # Min delay between saying something
 MAX_TIME = 7200  # Max delay between saying something (7200 = 2 hours)
