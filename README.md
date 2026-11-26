@@ -46,7 +46,7 @@ and sends the rendered image. Here is what they look like.
 
 ![Image of a 2 dimensional D20 rendered with Pillow, rolled a 15](mdImages/botD20.png)
 
-### The outlier: Multiroll
+### Multiroll
 
 Multiroll rolls multiple of the given die. The image is a collage of all rolls and the total of the
 rolls is in the message text. You may think that rolling multiple dice would start struggling with
