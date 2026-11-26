@@ -1,31 +1,25 @@
-import os
-import math
-import io
 import asyncio
+import io
+import math
+import os
 import random
-from random import randint, choice
 from functools import lru_cache
+from random import randint
 
 import discord
 from dotenv import load_dotenv
 from PIL import Image, ImageDraw, ImageFont
+
+try:  # Local party.py holds the real character names and DEX modifiers.
+    from party import CHARACTERS
+except ModuleNotFoundError:  # Public checkout: fall back to the placeholders.
+    from party_example import CHARACTERS
 
 load_dotenv()  # Loads .env for bot token (DISCORD_TOKEN) and quote channel "YAPPER_CHANNEL"
 
 bot = discord.Bot()
 
 DICE = ["d4", "d6", "d8", "d10", "d12", "d20"]
-
-
-# --- Rolling logic ---
-def roll_die(sides: int) -> int:
-    return randint(1, sides)
-
-
-def multiroll(die: str, count: int):
-    sides = int(die[1:])
-    rolls = [randint(1, sides) for _ in range(count)]
-    return rolls, sum(rolls)
 
 
 # --- Tuning knobs ---
@@ -109,6 +103,45 @@ MIN_TIME = 5  # Min delay between saying something
 MAX_TIME = 7200  # Max delay between saying something (7200 = 2 hours)
 TIME_DEBUG = True  # Prints delay between saying something in the terminal
 QUOTE_DEBUG = True  # Prints the quote the bot will say in the terminal.
+
+
+# --- Rolling logic ---
+def roll_die(sides: int) -> int:
+    return randint(1, sides)
+
+
+def multiroll(die: str, count: int):
+    sides = int(die[1:])
+    rolls = [randint(1, sides) for _ in range(count)]
+    return rolls, sum(rolls)
+
+
+# --- Initiative logic ---
+def _format_initiative(roll: int, dex: int, name: str) -> str:
+    """Show nat 20s and nat 1s as-is, other rolls show d20 + DEX."""
+    if roll == 20:
+        total = "NAT20"
+    elif roll == 1:
+        total = "NAT1"
+    else:
+        total = str(roll + dex)
+    return f"{name}: {total} ({dex:+d})"
+
+
+def _initiative_sort_key(roll: int, dex: int) -> tuple[float, int]:
+    """Nat 20 sorts above everything, nat 1 below; other rolls use the total."""
+    total = math.inf if roll == 20 else -math.inf if roll == 1 else roll + dex
+    return total, dex
+
+
+def roll_initiative(characters: dict[str, int]) -> list[str]:
+    """Roll one d20 each and return the party in initiative order."""
+    entries = [(roll_die(20), dex, name) for name, dex in characters.items()]
+    random.shuffle(entries)  # Exact ties stay in random order.
+    entries.sort(
+        key=lambda entry: _initiative_sort_key(entry[0], entry[1]), reverse=True
+    )
+    return [_format_initiative(roll, dex, name) for roll, dex, name in entries]
 
 
 # --- Drawing the dice using Pillow ---
@@ -335,6 +368,12 @@ async def goBig(
     await ctx.defer()
     rolls, total = multiroll(die, amount)
     await ctx.respond(f"total: {total}", file=render_rolls(int(die[1:]), rolls))
+
+
+@bot.slash_command(name="initiative", description="Roll for initiative!")
+async def initiative(ctx: discord.ApplicationContext):
+    order = roll_initiative(CHARACTERS)
+    await ctx.respond("\n".join(order) if order else "No characters configured.")
 
 
 bot.run(os.getenv("DISCORD_TOKEN"))

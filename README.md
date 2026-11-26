@@ -4,6 +4,8 @@
 
 - Rolls all the different kinds of dice my group uses and renders them with Pillow.
 - Able to roll multiple of the same dice at once using the multiroll command.
+- Rolls initiative for a fixed party, with character names and DEX modifiers kept in a local
+  `party.py`.
 - Different color die for low and maximum rolls.
 - Thoroughly commented and explained code.
 - Capable of sending quotes to a channel of your choice. (off by default)
@@ -56,6 +58,18 @@ show what multiroll looks like in practice, we'll roll 4 D20s:
 
 Nice! We rolled both a nat20 (max roll) and a nat1 (minimum roll)! This is a perfect display of the
 max and low roll color changes! Pretty neat, right?
+
+### Initiative
+
+`/initiative` rolls one d20 for every character in your `party.py` and replies with a plain text
+list in turn order, for example:
+
+![Screenshot of example initiative rolls](mdImages/initiativeResults.png)
+
+Each line is `character: total (+DEX)`, nat 20s and nat 1s show as `NAT20` and `NAT1` respectively
+instead of the total. Ordering is done based on the total (d20 + DEX), except a nat 20 always goes
+first and a nat 1 always goes last. Tied totals go to the higher DEX modifier and if they're still
+tied it's randomized. The order is only shown once and is not stored between commands.
 
 ## Deploying and modifying
 
@@ -145,6 +159,10 @@ This repo provides a `.env.example` with two values:
   `<The channel you want quotes to go into>` with the numeric ID of the channel the bot should post
   in: enable Developer Mode in Discord, then right-click the channel and choose Copy ID. If Yapper
   stays off, you can leave the placeholder as-is because the bot ignores it.
+
+- For `/initiative`, copy `party_example.py` to `party.py` and replace the placeholder names and
+  modifiers with your party's. `party.py` is gitignored, so your real values stay local; without it,
+  the bot uses the placeholders from `party_example.py`.
 
 8. You can run the bot!:
 
